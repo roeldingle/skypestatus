@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+#skypestatus_custom_timer{margin:15px 0 0 0}
+
+.input_msg_b {display: block;font-family: Tahoma;font-size: 10px;font-style: italic;margin-top: 5px;margin-left:10px;color: #808080;}
+.input_msg_b2 {display: block;font-family: Tahoma;font-size: 10px;font-style: italic;margin-top: 2px;margin-left:10px;color: #808080;}
+
+input.btn_apply {width:103px;height:25px !important;border:none;display:inline-block;text-align:center;padding:4px 0 5px 0;background:#000 url(/_sdk/img/googlemapmarker/bg_btn_input.gif) repeat-x;font-weight:bold;font-size:13px;color:#fff;text-decoration:none !important;vertical-align:middle}
+.custom_image {width:25px;height:25px}

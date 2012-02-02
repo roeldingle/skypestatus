@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adminmenus>
+    <menu lang="skypestatus" name="Skypestatus" param="SkypestatusPageSettings">
+    </menu>
+</adminmenus>
