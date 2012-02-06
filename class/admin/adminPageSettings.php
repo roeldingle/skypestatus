@@ -53,9 +53,10 @@ class adminPageSettings extends Controller_Admin
     	/*assign settings*/
     	$this->assign("aUserSetting",$aUserSetting);
     	
+    	/*set the users*/
+    	$aUsers = explode("+",$aUserSetting['username']);
+    	$this->assign("aUsers",$aUsers);
     	
-    		
-
     	/*image type options*/
     	$aImgOption = array('balloon','smallclassic','smallicon','mediumicon','dropdown-white','dropdown-trans');
     	$this->assign("aImgOption",$aImgOption);

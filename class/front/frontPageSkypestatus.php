@@ -7,93 +7,112 @@ class frontPageSkypestatus extends Controller_Front
     protected function run($aArgs)
     {
 
-    require_once('builder/builderInterface.php');
+    require_once 'builder/builderInterface.php';
+		
+	$sInitScript = usbuilder()->init($this->Request->getAppID(), $aArgs);
+	$this->writeJs($sInitScript);
     
-
  	/*assign objects*/
     $this->oGet = new modelGet;
-    
+ 
 	$this->display($aArgs);
 
     }
 
     protected function display($aArgs){
-    	
-    	/*define page*/
-    	$APP_NAME = "skypestatus";
-    	$this->assign("APP_NAME",$APP_NAME);
 
     	$this->importJS(__CLASS__);
 
 
-    	
-    	
     	/*set the user setting*/
     	$aUserSetting = $this->oGet->getRow(2,null);
     	
     	
     	/*set default values*/
-    	if(empty($aUserSetting)){
+    	if(empty($aUserSetting) || isset($aArgs['reset'])){
     		$aUserSetting = array(
-    				'zoom_level' => 1,
-    				'map_type' => "Normal",
-    				'locations' => '[{"loc":"Los Angeles, CA, USA","lat":"34.0522342","lng":"-118.2436849","marker":"0"}]',
-    				'display_options' => '{"zoom":{"zoom_flag":"0","zoom_size":"0","zoom_position":"0"},"map":{"map_flag":"0","map_type":"0","map_position":"1"},"scale":{"scale_flag":"0","scale_position":"2"},"street":{"street_flag":"0","street_position":"3"}}'
-    			);
+    				'username' => "skype.user",
+    				'image_type' => "balloon",
+    				'timer' => 5000,
+    				"custom"=> "0"
+    				);
     	
     	}
 
+    	/*set the users*/
+    	$aUsers = explode("+",$aUserSetting['username']);
     	
-    	$aMarkers = json_decode($aUserSetting['locations'],true);
-    	$aDisplayOpt = json_decode($aUserSetting['display_options'],true);
-    	
-    	
-    	
-	    $iLen = (count($aMarkers)-1);
-	    $this->assign('iLat', $aMarkers[$iLen][lat]);
-	    $this->assign('iLng', $aMarkers[$iLen][lng]);
-    	
-    	//give the string data
-    	$sData = '';
-    	
-    	//map container
-    	$sData .= '<div id="'.$APP_NAME.'_wrap" >';
-    	$sData .= '<div id="'.$APP_NAME.'_mapcontainer"  >';
-    	$sData .= '<div id="map_canvas" style="width:100%;height:100%;" ></div>';
-    	$sData .= '</div>';
-    	$sData .= '</div>';
-    	
-    	//markers
-    	$sData .= '<div id="'.$APP_NAME.'_location_wrap" >';
-    	if(count($aMarkers) != 0){
-    		$counter=0;
-    		foreach($aMarkers as $val){
-    			$sData .='<div id="'.$APP_NAME.'_marker_con_'.$counter.'"  style="display:none;" >';
-    			$sData .='<input type="text"  value="'.$val['loc'].' ('.$val['lat'].','.$val['lng'].','.$val['marker'].')" name="'.$APP_NAME.'_marker[]"   />';
-    			$sData .='</div>';
-    			$counter++;
-    		}
-    	}else{
-    		$sData .='<div  id="'.$APP_NAME.'_marker_con_0" style="display:none;" >';
-    		$sData .='<input type="text"   name="'.$APP_NAME.'_marker[]" value="Los Angeles, CA, USA(34.0522342,-118.2436849)" class="textbox" />';
-    		$sData .='</div>';
+    	foreach($aUsers as $key=>$val){
+    		$Status = $this->getDisplay($val,false,false );
+    		$aList[]['username']= $val;
+    		$aList[]['image']= '<img  class="skypestatus_img_'.$key.'" src="img/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
     	}
-    	$sData .= '</div>';
     	
-    	$sData .= '<div id="'.$APP_NAME.'_hidden_values" style="display:none;" >';
-    	$sData .= '<input type="text" id="'.$APP_NAME.'_zoom_level" value="'.$aUserSetting['zoom_level'].'" />';
-    	$sData .= '<input type="text" id="'.$APP_NAME.'_map_type" value="'.$aUserSetting['map_type'].'" />';
-    	$sData .= "<input type='text' id='".$APP_NAME."_display_options' value='".$aUserSetting['display_options']."' />";
-    	$sData .= '</div>';
+    	$this->loopFetch($aList);
     	
+    	/*
+		$this->assign("Skypestatus_user",$aUserSetting['username']);
+		$this->assign("Skypestatus_image_type",$aUserSetting['image_type']);
+		$this->assign("Skypestatus_timer",$aUserSetting['timer']);
+		$this->assign("Skypestatus_custom",$aUserSetting['custom']);
+*/
+		
+		//$this->assign("aUsers",$aUsers);
+		
+		$sData = '';
+		$sData .= '<div style="display:none;" >';
+		$sData .= '<input type="text" id="'.$APP_NAME.'_username" value="'.$aUserSetting['username'].'" />';
+		$sData .= '<input type="text" id="'.$APP_NAME.'_image_type" value="'.$aUserSetting['image_type'].'" />';
+		$sData .= '<input type="text" id="'.$APP_NAME.'_timer" value="'.$aUserSetting['timer'].'" />';
+		$sData .= '<input type="text" id="'.$APP_NAME.'_custom" value="'.$aUserSetting['custom'].'" />';
+		$sData .= '</div>';
+		
+		
+    	//$this->assign("Skypestatus",$aList[0]['username']);
     	
-    	
-    	
-    	
-    	$this->assign("Googlemapmarker",$sData);
-    	
-
-    	
-    	
+  
     }
+    
+	public function getDisplay($username, $image = false, $icon = false ){
+	
+		if($image && $icon)
+		{
+			return "http://mystatus.skype.com/".$icon."/".$username;
+		}
+		else if($image)
+		{
+			return "http://mystatus.skype.com/".$username;
+		}
+
+		else
+		{
+			$url = "http://mystatus.skype.com/".$username.".xml";
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, $url);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			$data = curl_exec($curl);
+			curl_close($curl);
+			
+			$pattern = '/xml:lang="en">(.*)</';
+			preg_match($pattern,$data, $match); 
+			
+			return $match[1];   
+		}
+	
+	}
+	
+    public function downloadXmlFile($path)
+    {
+    	$ch = curl_init();
+    	curl_setopt($ch, CURLOPT_URL,$path);
+    	curl_setopt($ch, CURLOPT_FAILONERROR,1);
+    	//curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+    	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    	curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+    	$retValue = curl_exec($ch);
+    	curl_close($ch);
+    
+    	return $retValue;
+    }
+
 }

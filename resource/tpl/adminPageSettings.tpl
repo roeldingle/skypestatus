@@ -25,10 +25,23 @@
 			</tr>
 				<tr>
 				<th>Skype username</th>
-				<td>
-					<span class="neccesary">*</span>
-					<span><input type="text"   value="<?php echo $aUserSetting['username']?>" name="<?php echo $APP_NAME;?>_username" id="<?php echo $APP_NAME;?>_username" class="fix" fw-filter="isFill" /></span>
-				
+				<td >
+					<div class="skype_username_content">
+						<ul>
+						<?php foreach($aUsers as $key=>$val){?>
+							<li class="<?php echo $APP_NAME;?>_li_wrap" id="<?php echo $APP_NAME;?>_li_wrap_<?php echo $key;?>" style="margin-left:1px;display:inline-block">
+								<div class="skype_user_container">
+								<span class="neccesary" style="float:left;margin-right:3px"  name="<?php echo $APP_NAME;?>_username[]" >*</span>
+									<p class="skype_username"><input type="text"   value="<?php echo $val;?>" name="<?php echo $APP_NAME;?>_username[]" id="<?php echo $APP_NAME;?>_username_1"  onkeyup="adminPageSettings.validate_user();" /></p>
+									<p class="skype_btn">
+										<a href="#" class="btn_plus" onclick="adminPageSettings.add_user(this);"><span class="hidden">Add</span></a>
+										<a href="#" class="btn_minus" onclick="adminPageSettings.delete_user(this);"><span class="hidden">Remove</span></a>
+									</p>
+								</div>
+							</li>
+							<?php }?>
+						</ul>
+					</div>
 				</td>
 			
 			</tr>
@@ -48,7 +61,7 @@
 			
 			</tr>
 			<tr>
-				<th>Update timer <?php echo $aUserSetting['custom'];?></th>
+				<th>Update timer</th>
 		 
 				<td>
 					<select  style="margin-left:10px;width:120px;" name="<?php echo $APP_NAME;?>_timer" id="<?php echo $APP_NAME;?>_timer" onchange="adminPageSettings.display_custom();" >
