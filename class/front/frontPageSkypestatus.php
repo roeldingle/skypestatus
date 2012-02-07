@@ -46,6 +46,7 @@ class frontPageSkypestatus extends Controller_Front
     		$Status = $this->getDisplay($val,false,false );
     		$aList[]['username']= $val;
     		$aList[]['image']= '<img  class="skypestatus_img_'.$key.'" src="img/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
+    		$aList[]['user']= '<img  class="skypestatus_img_'.$key.'" src="img/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />'.$val;
     	}
     	
     	$this->loopFetch($aList);

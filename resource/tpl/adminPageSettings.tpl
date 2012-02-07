@@ -32,7 +32,7 @@
 							<li class="<?php echo $APP_NAME;?>_li_wrap" id="<?php echo $APP_NAME;?>_li_wrap_<?php echo $key;?>" style="margin-left:1px;display:inline-block">
 								<div class="skype_user_container">
 								<span class="neccesary" style="float:left;margin-right:3px"  name="<?php echo $APP_NAME;?>_username[]" >*</span>
-									<p class="skype_username"><input type="text"   value="<?php echo $val;?>" name="<?php echo $APP_NAME;?>_username[]" id="<?php echo $APP_NAME;?>_username_1"  onkeyup="adminPageSettings.validate_user();" /></p>
+									<p class="skype_username"><input type="text"   value="<?php echo $val;?>" name="<?php echo $APP_NAME;?>_username[]" id="<?php echo $APP_NAME;?>_username_1"  onkeyup="adminPageSettings.validate_empty(this);" /></p>
 									<p class="skype_btn">
 										<a href="#" class="btn_plus" onclick="adminPageSettings.add_user(this);"><span class="hidden">Add</span></a>
 										<a href="#" class="btn_minus" onclick="adminPageSettings.delete_user(this);"><span class="hidden">Remove</span></a>
@@ -90,6 +90,8 @@
 
 
 </form>
+<!--form for reset-->
+<form method="POST" action="<?php echo $sUrl;?>" name="<?php echo $APP_NAME;?>_form_reset" id="<?php echo $APP_NAME;?>_form_reset" ><input type="hidden" name="<?php echo $APP_NAME;?>_reset" value="true" /></form>
 
 
 </body>

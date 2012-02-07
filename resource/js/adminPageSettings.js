@@ -16,7 +16,7 @@ var adminPageSettings = {
 			sData +='<li class="'+adminPageSettings.APP_NAME+'_li_wrap" id="'+adminPageSettings.APP_NAME+'_li_wrap_'+(iContainerSize+1)+'" style="margin-left:1px;display:inline-block">';
 			sData +='<div class="skype_user_container">';
 			sData +='<span class="neccesary" style="float:left;margin-right:3px"  name="'+adminPageSettings.APP_NAME+'_username[]" >*</span>';
-			sData +='<p class="skype_username"><input type="text"  name="'+adminPageSettings.APP_NAME+'_username[]" id="'+adminPageSettings.APP_NAME+'_username_'+(iContainerSize+1)+'"  fw-filter="isFill" /></p>';
+			sData +='<p class="skype_username"><input type="text"  name="'+adminPageSettings.APP_NAME+'_username[]" id="'+adminPageSettings.APP_NAME+'_username_'+(iContainerSize+1)+'"  onkeyup="adminPageSettings.validate_empty(this);" /></p>';
 			sData +='<p class="skype_btn"><a href="#" class="btn_plus" onclick="adminPageSettings.add_user(this);" ><span class="hidden">Add</span></a><a href="#" class="btn_minus" onclick="adminPageSettings.delete_user(this);"><span class="hidden">Remove</span></a></p>';
 			sData +='</div>';
 			sData +='</li>';
@@ -100,6 +100,14 @@ var adminPageSettings = {
 			}
 			
 		},
+		/*validate if empty*/
+		validate_empty: function(selector){
+			if($(selector).val() == ""){
+				$(selector).css("border","2px solid red");
+			}else{
+				$(selector).css("border","");
+			}
+		},
 		
 		/*save settings*/
 		setting_submit: function(form){
@@ -161,17 +169,11 @@ var adminPageSettings = {
 			
 		},
 		
-		validate_user: function(selector){
-			/*
-			if($(selector).val == ""){
-				alert($(selector).id);
-			}
-			*/
-		},
 		
 		/*reset to default*/
 		reset_default: function(){
-			window.location= usbuilder.getUrl("adminPageSettings")+"&reset=true";
+			
+			$("#"+adminPageSettings.APP_NAME+"_form_reset").submit();
 			
 		},
 		/*

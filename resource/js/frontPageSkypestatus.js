@@ -18,7 +18,7 @@ var frontPageSkypestatus= {
 							$.each(data['Data']['list'], function(key,val){
 								aUserdata = val.split("=>");
 								
-								$(".skypestatus_img_"+key).parent().empty().append('<img  class="skypestatus_img_'+key+'" src="img/skype_status/'+data['Data']['image_type']+'/'+aUserdata[1]+'.gif" />');
+								$(".skypestatus_img_"+key).attr('src','img/skype_status/'+data['Data']['image_type']+'/'+aUserdata[1]+'.gif');
 								
 							});
 						}
@@ -33,7 +33,7 @@ var frontPageSkypestatus= {
 
 $(document).ready(function(){
 
-	var timer = ($("#skypestatus_custom").val() == 0) ? parseInt($("#skypestatus_timer").val()) : parseInt($("#skypestatus_custom").val())*60;
+	var timer = ($("#skypestatus_custom").val() == 0) ? parseInt($("#skypestatus_timer").val()) : parseInt($("#skypestatus_custom").val())*60000;
 
 	setInterval(function(){
 		

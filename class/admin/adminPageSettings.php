@@ -38,7 +38,7 @@ class adminPageSettings extends Controller_Admin
     	
     	
     	/*set default values*/
-    	if(empty($aUserSetting) || isset($aArgs['reset'])){
+    	if(empty($aUserSetting) || isset($aArgs['skypestatus_reset'])){
     		$aUserSetting = array(
     				'username' => "skype.user",
     				'image_type' => "balloon",
@@ -47,6 +47,10 @@ class adminPageSettings extends Controller_Admin
     				);
     	
     	}
+    	
+    	/*assign url*/
+    	$sUrl = usbuilder()->getUrl('adminPageSettings');
+    	$this->assign("sUrl",$sUrl);
     	
  
     	
