@@ -7,10 +7,8 @@ class frontPageSkypestatusdata extends Controller_Front
     protected function run($aArgs)
     {
 
-    require_once 'builder/builderInterface.php';
-		
-	$sInitScript = usbuilder()->init($this->Request->getAppID(), $aArgs);
-	$this->writeJs($sInitScript);
+    require_once('builder/builderInterface.php');
+	usbuilder()->init($this, $aArgs);
     
  	/*assign objects*/
     $this->oGet = new modelGet;

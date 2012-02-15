@@ -7,7 +7,7 @@ class apiGet extends Controller_Api
     {
 
         require_once('builder/builderInterface.php');
-         usbuilder()->init($this->Request->getAppID(), $aArgs);
+		usbuilder()->init($this, $aArgs);
         
          $oGet = new modelGet;
          
