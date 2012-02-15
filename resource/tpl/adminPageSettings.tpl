@@ -60,6 +60,7 @@
 				</td>
 			
 			</tr>
+			<!--  
 			<tr>
 				<th>Update timer</th>
 		 
@@ -78,7 +79,7 @@
 				</td>
 			
 			</tr>
-			
+			-->
 			
 		
 			</table>

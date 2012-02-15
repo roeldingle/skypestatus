@@ -14,9 +14,9 @@ class apiExec extends Controller_Api
 	#data to insert
 	$aData = array(
 		'username' => $aArgs['get_username'],
-    	'image_type' => $aArgs['get_image_type'],
-    	'timer' => $aArgs['get_timer'],
-    	'custom' => $aArgs['get_custom']
+    	'image_type' => $aArgs['get_image_type']
+    	//'timer' => $aArgs['get_timer'],
+    	//'custom' => $aArgs['get_custom']
 		);
 	
     $dDeleted = $oExec->deleteData(2);

@@ -41,9 +41,9 @@ class adminPageSettings extends Controller_Admin
     	if(empty($aUserSetting) || isset($aArgs['skypestatus_reset'])){
     		$aUserSetting = array(
     				'username' => "skype.user",
-    				'image_type' => "balloon",
-    				'timer' => 5000,
-    				"custom"=> "0"
+    				'image_type' => "balloon"
+    				//'timer' => 5000,
+    				//"custom"=> "0"
     				);
     	
     	}

@@ -32,9 +32,9 @@ class frontPageSkypestatus extends Controller_Front
     	if(empty($aUserSetting) || isset($aArgs['reset'])){
     		$aUserSetting = array(
     				'username' => "skype.user",
-    				'image_type' => "balloon",
-    				'timer' => 5000,
-    				"custom"=> "0"
+    				'image_type' => "balloon"
+    				//'timer' => 5000,
+    				//"custom"=> "0"
     				);
     	
     	}
@@ -45,32 +45,12 @@ class frontPageSkypestatus extends Controller_Front
     	foreach($aUsers as $key=>$val){
     		$Status = $this->getDisplay($val,false,false );
     		$aList[]['username']= $val;
-    		$aList[]['image']= '<img  class="skypestatus_img_'.$key.'" src="img/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
-    		$aList[]['user']= '<img  class="skypestatus_img_'.$key.'" src="img/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />'.$val;
+    		$aList[]['image']= '<img  id="skypestatus_img_'.$key.'" class="skypestatus_img" src="/_sdk/img/skypestatus/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
+    		$aList[]['user']= '<img  id="skypestatus_img_'.$key.'" class="skypestatus_user" src="/_sdk/img/skypestatus/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />'.$val;
     	}
     	
     	$this->loopFetch($aList);
-    	
-    	/*
-		$this->assign("Skypestatus_user",$aUserSetting['username']);
-		$this->assign("Skypestatus_image_type",$aUserSetting['image_type']);
-		$this->assign("Skypestatus_timer",$aUserSetting['timer']);
-		$this->assign("Skypestatus_custom",$aUserSetting['custom']);
-*/
-		
-		//$this->assign("aUsers",$aUsers);
-		
-		$sData = '';
-		$sData .= '<div style="display:none;" >';
-		$sData .= '<input type="text" id="'.$APP_NAME.'_username" value="'.$aUserSetting['username'].'" />';
-		$sData .= '<input type="text" id="'.$APP_NAME.'_image_type" value="'.$aUserSetting['image_type'].'" />';
-		$sData .= '<input type="text" id="'.$APP_NAME.'_timer" value="'.$aUserSetting['timer'].'" />';
-		$sData .= '<input type="text" id="'.$APP_NAME.'_custom" value="'.$aUserSetting['custom'].'" />';
-		$sData .= '</div>';
-		
-		
-    	//$this->assign("Skypestatus",$aList[0]['username']);
-    	
+    	 	
   
     }
     
