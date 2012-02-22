@@ -113,6 +113,7 @@ var adminPageSettings = {
 		setting_submit: function(form){
 			
 			/*gather variables*/
+			var iSeq = $("#SEQ").val();
 			var bValid = oValidator.formName.getMessage(adminPageSettings.APP_NAME+'_form');
 			
 			var username = $("#"+adminPageSettings.APP_NAME+"_username").val();
@@ -138,6 +139,7 @@ var adminPageSettings = {
 						dataType: 'json',
 						data: {
 						action: 'setting_submit',
+						get_seq: iSeq,
 						get_username: adminPageSettings.get_users(),
 						get_image_type: image_type,
 						get_timer: timer,

@@ -5,10 +5,9 @@
 
 <!-- hidden values -->
 <input type="hidden"  id="APP_NAME" value="<?php echo $APP_NAME;?>" />
-<input type="hidden"  id="<?php echo $APP_NAME;?>_custom_value" value="<?php echo $aUserSetting['custom']?>" />
-
-
-		
+<input type="hidden"  id="<?php echo $APP_NAME;?>_custom_value" value="<?php echo $aUserSetting['custom'];?>" />
+<input type="hidden" id="SEQ" value="<?php echo $iSeq;?>" /><!--pluginurl-->
+	
 <form name="<?php echo $APP_NAME;?>_form"   method="POST">
 <table border="1" cellspacing="0" class="table_input_vr">
 			<colgroup>
