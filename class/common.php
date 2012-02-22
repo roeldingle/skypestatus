@@ -1,13 +1,16 @@
 <?php
 class common
 {
-	public function modelExec()
+	
+	function modelExec()
 	{
 		return getInstance('modelExec');
 	}
 	
-	public function modelGet()
+	
+	function modelGet()
 	{
 		return getInstance('modelGet');
 	}
+	
 }
