@@ -93,10 +93,12 @@ public function deleteData($iTable,$sWhere){
 	
 	
 	
-	function deleteContentsBySeq($aSeq)
+function deleteContentsBySeq($iTable,$aSeq)
 	{
+		$this->init();
+		$sTable = $this->chooseTable($iTable);
 		$sSeqs = implode(',', $aSeq);
-		$sQuery = "Delete from skypestatus_settings where seq in($sSeqs)";
+		$sQuery = "Delete from ".$sTable." where seq in($sSeqs)";
 		$mResult = $this->query($sQuery);
 		return $mResult;
 	}

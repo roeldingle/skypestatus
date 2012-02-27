@@ -12,7 +12,7 @@ class apiGet extends Controller_Api
          $oGet = new modelGet;
          
     	/*set the user setting*/
-    	$aUserSetting = $oGet->getRow(2,null);
+    	$aUserSetting = $oGet->getRow(2,"seq =".$aArgs['get_seq']);
     	
     	
     	/*set default values*/

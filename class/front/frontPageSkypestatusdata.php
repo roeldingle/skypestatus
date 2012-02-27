@@ -22,7 +22,7 @@ class frontPageSkypestatusdata extends Controller_Front
     	$this->importJS("frontPageSkypestatus");
     	
     	/*set the user setting*/
-    	$aUserSetting = $this->oGet->getRow(2,null);
+    	$aUserSetting = $this->oGet->getRow(2,"seq =".$this->getSequence());
     	
     	
     	/*set default values*/
@@ -30,8 +30,6 @@ class frontPageSkypestatusdata extends Controller_Front
     		$aUserSetting = array(
     				'username' => "skype.user",
     				'image_type' => "balloon"
-    			//	'timer' => 5000,
-    			//	"custom"=> "0"
     				);
     	
     	}
@@ -39,8 +37,7 @@ class frontPageSkypestatusdata extends Controller_Front
 		$sData = '';
 		$sData .= '<div style="display:none;">';
 		$sData .= '<input type="text" id="skypestatus_image_type" value="'.$aUserSetting['image_type'].'" />';
-		//$sData .= '<input type="text" id="skypestatus_timer" value="'.$aUserSetting['timer'].'" />';
-		//$sData .= '<input type="text" id="skypestatus_custom" value="'.$aUserSetting['custom'].'" />';
+		$sData .= '<input type="text" id="SEQ" value="'.$this->getSequence().'" />';
 		$sData .= '</div>';
 		
     	$this->assign("Skypestatusdata",$sData);

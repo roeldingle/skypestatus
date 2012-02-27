@@ -23,7 +23,7 @@ class frontPageSkypestatus extends Controller_Front
 
 
     	/*set the user setting*/
-    	$aUserSetting = $this->oGet->getRow(2,null);
+    	$aUserSetting = $this->oGet->getRow(2,"seq =".$this->getSequence());
     	
     	
     	/*set default values*/
