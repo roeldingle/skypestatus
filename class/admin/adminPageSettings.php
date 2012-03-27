@@ -45,8 +45,6 @@ class adminPageSettings extends Controller_Admin
     		$aUserSetting = array(
     				'username' => "skype.user",
     				'image_type' => "balloon"
-    				//'timer' => 5000,
-    				//"custom"=> "0"
     				);
     	
     	}
@@ -60,14 +58,13 @@ class adminPageSettings extends Controller_Admin
     	/*assign settings*/
     	$this->assign("aUserSetting",$aUserSetting);
     	
-    	/*set the users*/
-    	$aUsers = explode("+",$aUserSetting['username']);
-    	$this->assign("aUsers",$aUsers);
     	
     	/*image type options*/
     	$aImgOption = array('balloon','smallclassic','smallicon','mediumicon','dropdown-white','dropdown-trans');
     	$this->assign("aImgOption",$aImgOption);
     	
+    	/*for the additional links in the settins page*/
+    	$this->assign("bExtensionView", ($aArgs['etype'] ? 1 : 0));
 
     	/*set the template*/
     	$this->view(__CLASS__);

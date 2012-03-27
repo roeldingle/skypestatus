@@ -14,33 +14,12 @@
 				<col width="115px" />
 				<col width="*" />
 			</colgroup>
-			<tr>
-				<th>App ID :</th>
-				<td>
-					<p class="plugin_title"><?php echo $APP_NAME;?></p><br />
-					<span class="input_msg_b" >Skype setting : Tools > Options > Privacy [x] Allow my status to be shown on the web (must be set)</span>
-				</td>
 			
-			</tr>
 				<tr>
 				<th>Skype username</th>
 				<td >
-					<div class="skype_username_content">
-						<ul>
-						<?php foreach($aUsers as $key=>$val){?>
-							<li class="<?php echo $APP_NAME;?>_li_wrap" id="<?php echo $APP_NAME;?>_li_wrap_<?php echo $key;?>" style="margin-left:1px;display:inline-block">
-								<div class="skype_user_container">
-								<span class="neccesary" style="float:left;margin-right:3px"  name="<?php echo $APP_NAME;?>_username[]" >*</span>
-									<p class="skype_username"><input type="text"   value="<?php echo $val;?>" name="<?php echo $APP_NAME;?>_username[]" id="<?php echo $APP_NAME;?>_username_1"  onkeyup="adminPageSettings.validate_empty(this);" /></p>
-									<p class="skype_btn">
-										<a href="#" class="btn_plus" onclick="adminPageSettings.add_user(this);"><span class="hidden">Add</span></a>
-										<a href="#" class="btn_minus" onclick="adminPageSettings.delete_user(this);"><span class="hidden">Remove</span></a>
-									</p>
-								</div>
-							</li>
-							<?php }?>
-						</ul>
-					</div>
+					<span class="neccesary" style="float:left;margin-right:3px"  >*</span>
+					<p class="skype_username"><input type="text"   value="<?php echo $aUserSetting['username'];?>" name="<?php echo $APP_NAME;?>_username" id="<?php echo $APP_NAME;?>_username"  fw-filter="isFill" /></p>
 				</td>
 			
 			</tr>
@@ -85,13 +64,19 @@
 <div class="tbl_lb_wide_btn">
 		<input type="button" value="Save" class="btn_apply" onclick="adminPageSettings.setting_submit()" />
 		<a href="#" class="add_link" title="Reset to default" onclick="adminPageSettings.reset_default()" >Reset to Default</a>
+		<?php 
+			 if ($bExtensionView === 1){
+			            echo '<a href="/admin/sub/?module=ExtensionPageManage&code=' . ucfirst(APP_ID) . '&etype=MODULE" class="add_link" title="Return to Manage ' . ucfirst(APP_ID) . '">Return to Manage ' . ucfirst(APP_ID) . '</a>
+			            <a href="/admin/sub/?module=ExtensionPageMyextensions" class="add_link" title="Return to My Extensions">Return to My Extensions</a>';
+			  }
+		?>
 </div>
 
 
 
 </form>
 <!--form for reset-->
-<form method="POST" action="<?php echo $sUrl;?>" name="<?php echo $APP_NAME;?>_form_reset" id="<?php echo $APP_NAME;?>_form_reset" ><input type="hidden" name="<?php echo $APP_NAME;?>_reset" value="true" /></form>
+<form method="POST" action="" name="<?php echo $APP_NAME;?>_form_reset" id="<?php echo $APP_NAME;?>_form_reset" ><input type="hidden" name="<?php echo $APP_NAME;?>_reset" value="true" /></form>
 
 
 </body>

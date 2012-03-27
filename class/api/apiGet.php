@@ -19,9 +19,7 @@ class apiGet extends Controller_Api
     	if(empty($aUserSetting) || isset($aArgs['reset'])){
     		$aUserSetting = array(
     				'username' => "skype.user",
-    				'image_type' => "balloon",
-    				'timer' => 5000,
-    				"custom"=> "0"
+    				'image_type' => "balloon"
     				);
     	
     	}
@@ -30,8 +28,6 @@ class apiGet extends Controller_Api
     	$aUsers = explode("+",$aUserSetting['username']);
     	
     	$aData['image_type']= $aUserSetting['image_type'];
-    	$aData['timer']= $aUserSetting['timer'];
-    	$aData['custom']= $aUserSetting['custom'];
     	
     	foreach($aUsers as $val){
     		$Status = $this->getDisplay($val,false,false );

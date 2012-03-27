@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <lang>
-    <menu>  
-        <var name="skypestatus">Skypestatus</var>
-    </menu>
+    
+    <var name="skypestatus">Skypestatus</var>
+    <var name="menu_contents">Settings</var>
     <var name="lang">subject</var>
     <var name="name">Subject</var>
 </lang>

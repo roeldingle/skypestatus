@@ -3,5 +3,4 @@ CREATE TABLE IF NOT EXISTS `skypestatus_settings`(
 			 `seq` INT NOT NULL,
 			 `username` TEXT NOT NULL,
 			 `image_type` VARCHAR(20) NOT NULL,
-			 `timer` INT NOT NULL,
 	PRIMARY KEY (`idx`) ); 

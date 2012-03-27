@@ -25,7 +25,7 @@ var frontPageSkypestatus= {
 							$.each(data['Data']['list'], function(key,val){
 								aUserdata = val.split("=>");
 								
-								$("#skypestatus_img_"+key).attr('src','/_sdk/img/skypestatus/skype_status/'+data['Data']['image_type']+'/'+aUserdata[1]+'.gif');
+								$(".skypestatus_img_"+key).attr('src','/_sdk/img/skypestatus/skype_status/'+data['Data']['image_type']+'/'+aUserdata[1]+'.gif');
 								
 							});
 						}
