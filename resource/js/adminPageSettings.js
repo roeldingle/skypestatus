@@ -55,7 +55,10 @@ var adminPageSettings = {
 		/*reset to default*/
 		reset_default: function(){
 			
-			$("#"+adminPageSettings.APP_NAME+"_form_reset").submit();
+			//$("#"+adminPageSettings.APP_NAME+"_form_reset").submit();
+			
+			$("#skypestatus_username").val("");
+			$("#skypestatus_type_image").val("");
 			
 		},
 		/*
