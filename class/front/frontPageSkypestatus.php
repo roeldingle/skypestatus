@@ -32,7 +32,7 @@ class frontPageSkypestatus extends Controller_Front
     	/*icon and data*/
     	$sData .= '<span class="skypestatus_wrap_data" >';
     		$Status = $this->getDisplay($aUserSetting['username'],false,false );
-    		$sData .= '<img  class="skypestatus_icon"  src="/_sdk/img/skypestatus/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
+    		$sData .= '<img  class="skypestatus_icon"  src="[IMG]/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
     	$sData.= '</span>';
     	
     	/*username*/
@@ -67,8 +67,8 @@ class frontPageSkypestatus extends Controller_Front
 			    	var iSeq = $M(".SEQ").val();
 			    	var image_type = $M(".skypestatus_image_type").val();
 			    	
-			    	$M(".skypestatus_wrap_data").html("<img src=\' /_sdk/img/skypestatus/loader_small.gif\' />");
-			    	$M(".skypestatus_wrap_user").html("<img src=\' /_sdk/img/skypestatus/loader_small.gif\' />");
+			    	$M(".skypestatus_wrap_data").html("<img src=\' [IMG]/loader_small.gif\' />");
+			    	$M(".skypestatus_wrap_user").html("<img src=\' [IMG]/loader_small.gif\' />");
 			    
 				    	$.ajax({
 					    	url: usbuilder.getUrl("apiGet"),
@@ -80,7 +80,7 @@ class frontPageSkypestatus extends Controller_Front
 						    success: function(data){
 						    	
 							    if(data.Data){
-								  	 sData = "<img src=\'/_sdk/img/skypestatus/skype_status/"+data.Data.image_type+"/"+data.Data.status+".gif\' />";
+								  	 sData = "<img src=\'[IMG]/skype_status/"+data.Data.image_type+"/"+data.Data.status+".gif\' />";
 								  	 sDataUsername = data.Data.username;
 							    }
 						    	$M(".skypestatus_wrap_data").html(sData);
