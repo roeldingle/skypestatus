@@ -14,27 +14,11 @@ class apiGet extends Controller_Api
     	/*set the user setting*/
     	$aUserSetting = $oGet->getRow(2,"seq =".$aArgs['get_seq']);
     	
-    	
-    	/*set default values*/
-    	if(empty($aUserSetting) || isset($aArgs['reset'])){
-    		$aUserSetting = array(
-    				'username' => "skype.user",
-    				'image_type' => "balloon"
-    				);
-    	
-    	}
-    	
     	/*set the users*/
-    	$aUsers = explode("+",$aUserSetting['username']);
-    	
     	$aData['image_type']= $aUserSetting['image_type'];
+    	$aData['status']= $this->getDisplay($aUserSetting['username'],false,false );
+    	$aData['username']= $aUserSetting['username'];
     	
-    	foreach($aUsers as $val){
-    		$Status = $this->getDisplay($val,false,false );
-    		$aList[]= $val."=>".$Status;
-    	}
-    	
-    	$aData['list'] = $aList;
     	
     	return $aData;
         

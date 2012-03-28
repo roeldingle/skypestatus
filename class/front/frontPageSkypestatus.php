@@ -21,37 +21,38 @@ class frontPageSkypestatus extends Controller_Front
 
     	/*set the user setting*/
     	$aUserSetting = $this->oGet->getRow(2,"seq =".$this->getSequence());
-    	
-    	/*set default values*/
-    	if(empty($aUserSetting) || isset($aArgs['reset'])){
-    		$aUserSetting = array(
-    				'username' => "skype.user",
-    				'image_type' => "balloon"
-    				);
-    	}
 
     	$sData = '';
+    	$sDataUsername = '';
     	$sData .= '<div style="display:none;"  >';
     	$sData .= '<input type="text" class="skypestatus_image_type" value="'.$aUserSetting['image_type'].'" />';
     	$sData .= '<input type="text" class="SEQ" value="'.$this->getSequence().'" />';
     	$sData .= '</div>';
     	
-    	/*set the users*/
-    	$aUsers = explode("+",$aUserSetting['username']);
-    	$sData .= '<div class="skypestatus_wrap" >';
-    	foreach($aUsers as $key=>$val){
-    		$Status = $this->getDisplay($val,false,false );
-    		$sData .= '<p><img  class="skypestatus_img_'.$key.'"  src="/_sdk/img/skypestatus/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />'.$val.'</p>';
-    	}
-    	$sData.= '</div>';
+    	/*icon and data*/
+    	$sData .= '<span class="skypestatus_wrap_data" >';
+    		$Status = $this->getDisplay($aUserSetting['username'],false,false );
+    		$sData .= '<img  class="skypestatus_icon"  src="/_sdk/img/skypestatus/skype_status/'.$aUserSetting['image_type'].'/'.$Status.'.gif" />';
+    	$sData.= '</span>';
     	
-    	$this->assign("display",$sData);
+    	/*username*/
+    	$sDataUsername .= '<span class="skypestatus_wrap_user" >';
+    	$sDataUsername .= $aUserSetting['username'];
+    	$sDataUsername.= '</span>';
+    	
+    	if($aUserSetting){
+    	$this->assign("icon",$sData);
+    	$this->assign("username",$sDataUsername);
     	
     	$Skypestatus_update = 'update';
     	$this->assign("update",$Skypestatus_update);
     	
     	$this->init_js($aArgs);	 	
-  
+    	}
+    	else{
+    		
+    		$this->fetchClear();
+    	}
     }
     
     protected function init_js($aArgs){
@@ -62,29 +63,28 @@ class frontPageSkypestatus extends Controller_Front
 	    	var frontPageSkypestatus= {
 		    	/*display of front*/
 		    	display_front: function(){
-			    	var sData = "";
+			    	
 			    	var iSeq = $M(".SEQ").val();
 			    	var image_type = $M(".skypestatus_image_type").val();
 			    	
-			    	$M(".skypestatus_wrap").html("<img src=\' /_sdk/img/skypestatus/loader.gif\' />");
+			    	$M(".skypestatus_wrap_data").html("<img src=\' /_sdk/img/skypestatus/loader_small.gif\' />");
+			    	$M(".skypestatus_wrap_user").html("<img src=\' /_sdk/img/skypestatus/loader_small.gif\' />");
 			    
 				    	$.ajax({
 					    	url: usbuilder.getUrl("apiGet"),
 					    	type: "post",
 					    	dataType: "json",
 					    	data: {
-					    	action: "setting_submit",
 					    	get_seq: iSeq
 						    },
 						    success: function(data){
 						    	
-							    if(data[\'Data\']){
-								    $.each(data[\'Data\'][\'list\'], function(key,val){
-								    	aUserdata = val.split("=>");
-								  	  	sData += "<p><img src=\'/_sdk/img/skypestatus/skype_status/"+data[\'Data\'][\'image_type\']+"/"+aUserdata[1]+".gif\' />"+aUserdata[0]+"</p>";
-								    });
+							    if(data.Data){
+								  	 sData = "<img src=\'/_sdk/img/skypestatus/skype_status/"+data.Data.image_type+"/"+data.Data.status+".gif\' />";
+								  	 sDataUsername = data.Data.username;
 							    }
-						    	$M(".skypestatus_wrap").html(sData);
+						    	$M(".skypestatus_wrap_data").html(sData);
+						    	$M(".skypestatus_wrap_user").html(sDataUsername);
 						    }
 				   		});
 		   		 }

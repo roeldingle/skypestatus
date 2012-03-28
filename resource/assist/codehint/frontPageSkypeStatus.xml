@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <codehint>
-    <var value="display" name="This will display the app"></var>
+    <var value="icon" name="This will display the status icon"></var>
+    <var value="username" name="This will display the username"></var>
     <var value="update" name="The class name for the update status button/link"></var>
 </codehint>
+

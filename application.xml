@@ -19,6 +19,7 @@
     <front use="on">
         <ifs>
             <if class="frontPageSkypeStatus" permission="off" code-assist="on" desc="for displaying the app in front"></if>
+            <if class="frontPageNoRecord" permission="off" code-assist="on" desc="for displaying no record"></if>
         </ifs>
     </front>
 </application>
