@@ -1,5 +1,4 @@
 <?php
-
 class adminPageAdvanced extends Controller_Admin
 {
     protected function run($args)
